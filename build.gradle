@@ -1,0 +1,67 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'com.google.cloud.tools.jib' version '3.1.4'
+	id 'java'
+}
+
+group = 'showcase'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+
+	reports {
+        junitXml {
+            outputPerTestCase = true // defaults to false
+            mergeReruns = true // defaults to false
+        }
+    }
+}
+
+jib {
+	from{
+		image = 'openjdk:11.0.4-jdk-slim'
+		auth {
+			username = ''
+			password = ''
+		}
+	}
+	to {
+		image = 'showcase/showcase-app-java-cloud-native:latest'
+		auth {
+			username = ''
+			password = ''
+		}
+	}
+	container {
+		jvmFlags = ['-Xms128m', '-server']
+		mainClass = 'showcase.cloudnative.AppJavaCloudNativeApplication'
+		creationTime = 'USE_CURRENT_TIMESTAMP'
+		ports = ['9090/tcp']
+		user = 'appuser'
+		format = 'OCI'
+	}
+}
