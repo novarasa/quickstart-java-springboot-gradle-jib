@@ -30,11 +30,11 @@ jobs:
     - name: Build with Gradle
       run: gradle build test
 
-    - name: Archive Test Results
+    - name: Archive Test Reports
       uses: actions/upload-artifact@v2
       with:
         name: test-reports
-        path: .gradle/reports
+        path: build/reports
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
