@@ -23,7 +23,7 @@ Quickstart repository to build a containerized Java application using Gradle & J
 
 ## Changes required in an Enterprise setup
 Within an Enterprise, you wouldn't typically be directly using the online Maven Repository (or) Docker Hub to pull / push artifacts. So some modifications to the gradle configurations will be required.
-* `gradle#gradle-wrapper.properties` - amend `distributionUrl` to point to Gradle distributions available in your enterprise's artifact repository (JFrog Artifactory / Sonatype Nexus)
+* `gradle/gradle-wrapper.properties` - amend `distributionUrl` to point to Gradle distributions available in your enterprise's artifact repository (JFrog Artifactory / Sonatype Nexus)
 * `build.gradle` - `jib.from.image` `jib.to.image` should point to fully qualified paths in your enterprise's container registry and `jib.from.auth` `jib.to.auth` should the developer / API credentials used to pull / push images. Do not hardcode credentials instead pass them as environment variables from your CI pipeline.
 
 
