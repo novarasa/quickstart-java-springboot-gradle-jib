@@ -61,7 +61,6 @@ jib {
 		mainClass = 'showcase.cloudnative.AppJavaCloudNativeApplication'
 		creationTime = 'USE_CURRENT_TIMESTAMP'
 		ports = ['9090/tcp']
-		user = 'appuser'
 		format = 'OCI'
 	}
 }
