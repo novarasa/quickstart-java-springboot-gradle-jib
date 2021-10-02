@@ -50,7 +50,7 @@ jib {
 		}
 	}
 	to {
-		image = 'showcase/showcase-app-java-cloud-native:latest'
+		image = 'novarasa/quickstart-java-springboot:latest'
 		auth {
 			username = ''
 			password = ''
